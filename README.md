@@ -17,7 +17,19 @@ Se debe instalar un compilador antes de correr la línea pip, use **sudo apt ins
 ## 3.	Iniciar entorno local
 Levante django, **python manage.py runserver**
 
+
+## 4.   Connect db
+Connect to the database throught DBeaver or any database client with the following credentials or configure your credentials and after run 'python manage.py makemigrations' and 'python manage.py migrate'
+```text
+NAME: "ecommerce"
+USER: "daimer"
+PASSWORD: "Redes1212"
+HOST: "localhost"
+PORT: "5433"
+```
+After that execute the following script
+
+
 # Notas
 Los archivos independientes de los módulos se ubican en /filemanager (archivos transversales como imagenes, css, fuentes y demás), la carpeta /media es para los archivos que se suben por la applicacion y dependen de cada módulo.
-
-De no aparecer se debe de crear la carpeta /apps, en esta carpeta se ubican los módulos de viclass. 
+. 
