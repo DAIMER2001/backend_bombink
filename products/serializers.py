@@ -17,7 +17,7 @@ class ImagesSerializer(serializers.ModelSerializer):
 class ProductSerializer(BaseSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'name', 'price', 'discount', 'images', 'country',)
+        fields = ('id', 'name', 'description', 'price', 'discount', 'images', 'country',)
         expandable_fields = {
             'images': (ImagesSerializer, {'many': True}),
         }
@@ -43,7 +43,7 @@ class ProductFilter(filters.FilterSet):
 
     class Meta:
         model = Product
-        fields =  ('id', 'name', 'price', 'discount', 'images', 'country',)
+        fields =  ('id', 'name', 'description', 'price', 'discount', 'images', 'country',)
 
 
 class HistorySerializer(BaseSerializer):

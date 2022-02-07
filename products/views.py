@@ -34,7 +34,7 @@ class ProductsViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filterRest.SearchFilter]
     filterset_class = ProductFilter
-    search_fields = ['^name',]
+    search_fields = ['^name', '^description',]
 
 
 class ProductsSearchViewSet(viewsets.ReadOnlyModelViewSet):
@@ -43,7 +43,7 @@ class ProductsSearchViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = ExtendedPagination
     filterset_class = ProductFilter
     filter_backends = [DjangoFilterBackend, filterRest.SearchFilter]
-    search_fields = ['^name',]
+    search_fields = ['^name', '^description',]
 
     def dispatch(self, request, *args, **kwargs):
         try:
@@ -63,40 +63,6 @@ class ProductsSearchViewSet(viewsets.ReadOnlyModelViewSet):
         except Product.DoesNotExist:
             self.property = None
         return super().dispatch(request, *args, **kwargs)
-
-    # def get_context_data(self, **kwargs):
-    #     data = super().get_context_data(**kwargs)
-    #     queryset = Product.objects.all()
-    #     filter_product = ProductFilter(self.request.GET, queryset=queryset)
-    #     if filter_product.qs is not None:
-    #         for product in filter_product.qs:
-    #             productHistory = HistorySearchProduct.objects.filter(id_product = product.id).first()
-    #             count = 1
-    #             if productHistory is not None:
-    #                 dataHistory = HistorySerializer(productHistory, many = False).data
-    #                 count = dataHistory['count_search'] + 1
-    #             HistorySearchProduct.objects.update_or_create(
-    #                 id_product=product,
-    #                 defaults={'count_search': count},
-    #             )
-    #     return data
-
-    # def get_queryset(self):
-    #     queryset = Product.objects.all()
-    #     filter_product = ProductFilter(self.request.GET, queryset=queryset)
-    #     if filter_product.qs is not None:
-    #         for product in filter_product.qs:
-    #             productHistory = HistorySearchProduct.objects.filter(id_product = product.id).first()
-    #             count = 1
-    #             if productHistory is not None:
-    #                 dataHistory = HistorySerializer(productHistory, many = False).data
-    #                 count = dataHistory['count_search'] + 1
-    #             HistorySearchProduct.objects.update_or_create(
-    #                 id_product=product,
-    #                 defaults={'count_search': count},
-    #             )
-
-    #     return queryset
 
 
 class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
