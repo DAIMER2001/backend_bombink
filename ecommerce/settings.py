@@ -25,7 +25,7 @@ SECRET_KEY = 'ce$z9*r@p7_cez7)4j*2wg+k356jf3p+9hxdmx)138j8a^=7=b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', os.environ.get("DJANGO_APP_HOST",'localhost')]
 
 
 # Application definition
@@ -47,6 +47,7 @@ PUGLINS = [
 ]
 
 LOCAL_APPS = [
+    'user',
     'mixins',
     'products',
 ]
@@ -123,6 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "user.CustomUser"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

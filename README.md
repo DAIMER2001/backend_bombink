@@ -59,3 +59,29 @@ en la siguientes apis encontrara una documentación general de todo el proyecto
 http://127.0.0.1:8000/api/swagger/
 http://127.0.0.1:8000/api/swagger/
 http://127.0.0.1:8000/api/redoc/
+
+
+# install pip
+python3 -m pip install --upgrade pip
+
+# config and install virtualenv
+
+pip3 install virtualenv
+
+virtualenv bombink
+
+source bombink/bin/activate
+
+pip install -r requirements.txt
+# run environment with 
+
+source bombink/bin/activate
+
+
+# run dockerfile
+docker build -t bombink .
+
+docker run -p 8000:8000 bombink
+
+-> docker ls
+

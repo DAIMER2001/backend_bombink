@@ -15,12 +15,30 @@ class ImagesSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(BaseSerializer):
+    images = ImagesSerializer(many=True, required=False)
     class Meta:
         model = Product
         fields = ('id', 'name', 'description', 'price', 'discount', 'images', 'country',)
         expandable_fields = {
             'images': (ImagesSerializer, {'many': True}),
         }
+    
+    def create(self, validated_data):
+        images_data = validated_data.pop('images', [])
+        product = Product.objects.create(**validated_data)
+        self._create_images(product, images_data)
+        return product
+
+    def update(self, instance, validated_data):
+        images_data = validated_data.pop('images', [])
+        instance = super().update(instance, validated_data)
+        instance.images.all().delete()
+        self._create_images(instance, images_data)
+        return instance
+
+    def _create_images(self, product, images_data):
+        for image_data in images_data:
+            File.objects.create(product=product, **image_data)
 
 
 
